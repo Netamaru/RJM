@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Kriteria extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    protected $fillable = [
+        'kriteria'
+    ];
 }

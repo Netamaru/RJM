@@ -31,3 +31,6 @@ Route::get('/dashboard/kriteria', [KriteriaController::class, 'index'])->middlew
 Route::get('/dashboard/input-kayu', [KayuController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/input-bobot', [BobotController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/perhitungan', [DashboardController::class, 'perhitungan'])->middleware('auth');
+
+Route::get('dashboard/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('kriteria.remove');
+route::resource('dashboard/kriteria', KriteriaController::class);

@@ -15,7 +15,9 @@ class KriteriaController extends Controller
      */
     public function index()
     {
-        return view('dashboard.kriteria');
+        return view('dashboard.kriteria', [
+            'data' => Kriteria::all()
+        ]);
     }
 
     /**
@@ -23,6 +25,7 @@ class KriteriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         //
@@ -36,7 +39,9 @@ class KriteriaController extends Controller
      */
     public function store(StoreKriteriaRequest $request)
     {
-        //
+        Kriteria::Create(['kriteria' => $request['kriteria']]);
+
+        return redirect('/dashboard/kriteria');
     }
 
     /**
@@ -79,8 +84,15 @@ class KriteriaController extends Controller
      * @param  \App\Models\Kriteria  $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kriteria $kriteria)
+    // public function destroy(Kriteria $kriteria)
+    // {
+    //     $kriteria->delete();
+    //     return redirect('/dashboard/kriteria');
+    // }
+
+    public function destroy($id)
     {
-        //
+        Kriteria::where("id", $id)->delete();
+        return redirect('/dashboard/kriteria');
     }
 }
