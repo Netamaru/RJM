@@ -40,7 +40,7 @@
             </table>
         </div>
         <div class="card" style="width: 25rem;">
-            <h3 class="pt-3 text-primary">Daftar Kriteria</h3>
+            <h3 class="pt-3 text-primary">Input Kriteria</h3>
             <div class="container">
                 <form method="post" target="dashboard/kriteria/">
                     @csrf
@@ -51,7 +51,8 @@
                         <label for="disabledTextInput">Nama Atribut</label>
                         <input type="text" id="disabledTextInput" class="form-control" placeholder="Pemilihan Kayu">
                     </fieldset>
-                    <button type="submit" class="btn btn-primary mt-3" style="width: 22rem;">Simpan</button>
+                    <button type="submit" class="btn btn-primary mt-3 mb-5" style="width: 22rem;">Simpan</button>
+                    {{ Session::get('dataError') }}
                 </form>
             </div>
         </div>
