@@ -1,8 +1,13 @@
 @extends('layouts.main')
 @section('container')
     <h1>Kriteria</h1>
+    {!! Session::get('dataDeleted')
+        ? '<p class="fs-5 border border-success rounded-1 text-center bg-success bg-opacity-10 w-100 mb-3">' .
+            Session::get('dataDeleted') .
+            '</p>'
+        : '' !!}
     <div class="row justify-content-between">
-        <div class="card" style="width: 50rem;">
+        <div class="card pb-3" style="width: 50rem;">
             <h3 class="pt-3 text-primary">Daftar Kriteria</h3>
             <table class="table">
                 <thead>
@@ -39,7 +44,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="card" style="width: 25rem;">
+        <div class="card mt-3 mb-3" style="width: 25rem; height: auto;">
             <h3 class="pt-3 text-primary">Input Kriteria</h3>
             <div class="container">
                 <form method="post" target="dashboard/kriteria/">
@@ -51,8 +56,17 @@
                         <label for="disabledTextInput">Nama Atribut</label>
                         <input type="text" id="disabledTextInput" class="form-control" placeholder="Pemilihan Kayu">
                     </fieldset>
-                    <button type="submit" class="btn btn-primary mt-3 mb-5" style="width: 22rem;">Simpan</button>
-                    {{ Session::get('dataError') }}
+                    <button type="submit" class="btn btn-primary mt-3 mb-3 w-100">Simpan</button>
+                    {!! Session::get('dataError')
+                        ? '<p class="fs-5 border border-danger rounded-1 text-center bg-danger bg-opacity-10">' .
+                            Session::get('dataError') .
+                            '</p>'
+                        : '' !!}
+                    {!! Session::get('dataAdded')
+                        ? '<p class="fs-5 border border-success rounded-1 text-center bg-success bg-opacity-10">' .
+                            Session::get('dataAdded') .
+                            '</p>'
+                        : '' !!}
                 </form>
             </div>
         </div>
