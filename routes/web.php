@@ -19,12 +19,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// main
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
-
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
+// dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/laporan', [LaporanController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/kriteria', [KriteriaController::class, 'index'])->middleware('auth');
@@ -32,6 +33,8 @@ Route::get('/dashboard/input-kayu', [KayuController::class, 'index'])->middlewar
 Route::get('/dashboard/input-bobot', [BobotController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/perhitungan', [DashboardController::class, 'perhitungan'])->middleware('auth');
 
-Route::get('dashboard/kriteria/delete/{id}', [KriteriaController::class, 'destroy'])->name('kriteria.remove');
-Route::get('dashboard/kriteria/update/{id}', [KriteriaController::class, 'edit'])->name('kriteria.edit');
+// kriteria
 route::resource('dashboard/kriteria', KriteriaController::class);
+Route::get('dashboard/kriteria/delete/{id}', [KriteriaController::class, 'destroy'])->name('kriteria.remove')->middleware('auth');
+Route::get('dashboard/kriteria/update/{id}', [KriteriaController::class, 'edit'])->name('kriteria.edit')->middleware('auth');
+Route::get('dashboard/kriteria/create/{param}', [KriteriaController::class, 'tambah'])->name('kriteria.tambah')->middleware('auth');

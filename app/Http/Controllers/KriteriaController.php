@@ -40,9 +40,7 @@ class KriteriaController extends Controller
     public function store(StoreKriteriaRequest $request)
     {
         if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back()->with('dataError', 'Kriteria <b>' . $request['kriteria'] . '</b> sudah ada di database');
-
         Kriteria::Create(['kriteria' => $request['kriteria']]);
-
         return back()->with('dataAdded', 'Kriteria <b>' . $request['kriteria'] . '</b> berhasil ditambahkan');
     }
 
@@ -95,6 +93,13 @@ class KriteriaController extends Controller
     //     $kriteria->delete();
     //     return redirect('/dashboard/kriteria');
     // }
+
+    public function tambah(StoreKriteriaRequest $request)
+    {
+        if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back()->with('dataError', 'Kriteria <b>' . $request['kriteria'] . '</b> sudah ada di database');
+        Kriteria::Create(['kriteria' => $request['kriteria']]);
+        return back()->with('dataAdded', 'Kriteria <b>' . $request['kriteria'] . '</b> berhasil ditambahkan');
+    }
 
     public function destroy($id)
     {

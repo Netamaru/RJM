@@ -100,8 +100,9 @@
         <div class="card mb-3" style="width: 25rem; height: 18rem;">
             <h3 class="mt-3 text-primary">Input Kriteria</h3>
             <div class="container">
-                <form method="post" target="dashboard/kriteria">
+                <form method="post" action="{{ route('kriteria.tambah', $kriteria) }}">
                     @csrf
+                    {{ method_field('GET') }}
                     <label for="title" class="mt-3">Nama Kriteria</label>
                     <input type="text" class="form-control" placeholder="Masukkan Nama..." aria-label="kriteria"
                         id="kriteria" name="kriteria" required pattern="\S(.*\S)?">
