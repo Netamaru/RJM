@@ -39,11 +39,11 @@ class KriteriaController extends Controller
      */
     public function store(StoreKriteriaRequest $request)
     {
-        if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return redirect('dashboard/kriteria')->with('dataError', 'Kriteria <b>' . $request['kriteria'] . '</b> sudah ada di database');
+        if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back()->with('dataError', 'Kriteria <b>' . $request['kriteria'] . '</b> sudah ada di database');
 
         Kriteria::Create(['kriteria' => $request['kriteria']]);
 
-        return redirect('dashboard/kriteria')->with('dataAdded', 'Kriteria <b>' . $request['kriteria'] . '</b> berhasil ditambahkan');
+        return back()->with('dataAdded', 'Kriteria <b>' . $request['kriteria'] . '</b> berhasil ditambahkan');
     }
 
     /**
@@ -63,9 +63,13 @@ class KriteriaController extends Controller
      * @param  \App\Models\Kriteria  $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kriteria $kriteria)
+    public function edit($id, StoreKriteriaRequest $request)
     {
-        //
+        $data = Kriteria::find($id);
+        $kriteria = $data->kriteria;
+        if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back();
+        $data->update(['kriteria' => $request['kriteria']]);
+        return back()->with('dataEdited', 'Kriteria <b>' . $kriteria . '</b> berhasil diedit menjadi <b>' . $request['kriteria'] . '</b>');
     }
 
     /**
@@ -97,6 +101,6 @@ class KriteriaController extends Controller
         $data = Kriteria::find($id);
         $kriteria = $data->kriteria;
         $data->delete();
-        return redirect('dashboard/kriteria')->with('dataDeleted', 'Kriteria <b>' . $kriteria . '</b> berhasil dihapus');
+        return back()->with('dataDeleted', 'Kriteria <b>' . $kriteria . '</b> berhasil dihapus');
     }
 }
