@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('kriterias', function (Blueprint $table) {
             $table->id();
             $table->string('kriteria')->unique();
+            $table->integer('bobot');
             $table->string('pendukung_keputusan')->default('Pemilihan Kayu');
             $table->timestamps();
         });

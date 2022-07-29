@@ -16,7 +16,8 @@ class KriteriaController extends Controller
     public function index()
     {
         return view('dashboard.kriteria', [
-            'data' => Kriteria::all()
+            'data' => Kriteria::all(),
+            'kriteria' => Kriteria::all()
         ]);
     }
 
@@ -64,10 +65,9 @@ class KriteriaController extends Controller
     public function edit($id, StoreKriteriaRequest $request)
     {
         $data = Kriteria::find($id);
-        $kriteria = $data->kriteria;
-        if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back();
-        $data->update(['kriteria' => $request['kriteria']]);
-        return back()->with('dataEdited', 'Kriteria <b>' . $kriteria . '</b> berhasil diedit menjadi <b>' . $request['kriteria'] . '</b>');
+        if (Kriteria::where('kriteria', $request['kriteria'])->where('bobot', $request['bobot'])->count() == 1) return back();
+        $data->update(['kriteria' => $request['kriteria'], 'bobot' => $request['bobot']]);
+        return back()->with('dataEdited', 'Kriteria berhasil diedit');
     }
 
     /**
@@ -97,7 +97,7 @@ class KriteriaController extends Controller
     public function tambah(StoreKriteriaRequest $request)
     {
         if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back()->with('dataError', 'Kriteria <b>' . $request['kriteria'] . '</b> sudah ada di database');
-        Kriteria::Create(['kriteria' => $request['kriteria']]);
+        Kriteria::Create(['kriteria' => $request['kriteria'], 'bobot' => $request['bobot']]);
         return back()->with('dataAdded', 'Kriteria <b>' . $request['kriteria'] . '</b> berhasil ditambahkan');
     }
 

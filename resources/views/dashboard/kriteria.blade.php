@@ -22,7 +22,7 @@
             '</p>'
         : '' !!}
     <div class="row justify-content-between">
-        <div class="card mb-3" style="width: 50rem;">
+        <div class="card mb-3 overflow-auto" style="width: 55rem; max-height: 40rem; height: auto">
             <h3 class="pt-3 text-primary">Daftar Kriteria</h3>
             <table class="table">
                 <thead>
@@ -30,6 +30,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Pendukung Keputusan</th>
                         <th scope="col">Kriteria</th>
+                        <th scope="col">Bobot</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -42,6 +43,7 @@
                             <th scope="row">{{ $number += 1 }}</th>
                             <td>{{ $kriteria->pendukung_keputusan }}</td>
                             <td>{{ $kriteria->kriteria }}</td>
+                            <td>{{ $kriteria->bobot }}</td>
                             <td>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-link text-warning" data-bs-toggle="modal"
@@ -71,6 +73,12 @@
                                                             value="{{ $kriteria->kriteria }}" aria-label="kriteria">
                                                         {{ Request::input('kriteria') }}
                                                     </div>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">Bobot</span>
+                                                        <input type="text" class="form-control" placeholder="Bobot"
+                                                            name="bobot" required pattern="\S(.*\S)?"
+                                                            value="{{ $kriteria->bobot }}" aria-label="kriteria">
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -97,7 +105,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="card mb-3" style="width: 25rem; height: 18rem;">
+        <div class="card mb-3" style="width: 25rem; height: 21rem;">
             <h3 class="mt-3 text-primary">Input Kriteria</h3>
             <div class="container">
                 <form method="post" action="{{ route('kriteria.tambah', $kriteria) }}">
@@ -110,8 +118,20 @@
                         <label for="disabledTextInput" class="mt-3">Nama Atribut</label>
                         <input type="text" id="disabledTextInput" class="form-control" placeholder="Pemilihan Kayu">
                     </fieldset>
+                    <label for="bobot" class="mt-3">bobot&nbsp;&nbsp;&nbsp;</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="bobot" id="bobot" value="1" checked>
+                        <label class="form-check-label" for="inlineRadio1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="bobot" id="bobot" value="2">
+                        <label class="form-check-label" for="inlineRadio2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="bobot" id="bobot" value="3">
+                        <label class="form-check-label" for="inlineRadio3">3</label>
+                    </div>
                     <button type="submit" class="btn btn-primary mt-3 mb-3 w-100">Simpan</button>
-
                 </form>
             </div>
         </div>

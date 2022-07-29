@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bobot;
+use App\Models\Kriteria;
 use App\Http\Requests\StoreBobotRequest;
 use App\Http\Requests\UpdateBobotRequest;
 
@@ -15,7 +16,10 @@ class BobotController extends Controller
      */
     public function index()
     {
-        return view('dashboard.bobot');
+        return view('dashboard.bobot', [
+            'bobotData' => Bobot::all(),
+            'kriteriaData' => Kriteria::all()
+        ]);
     }
 
     /**
@@ -56,9 +60,12 @@ class BobotController extends Controller
      * @param  \App\Models\Bobot  $bobot
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bobot $bobot)
+    public function edit($id, StoreBobotRequest $request)
     {
-        //
+        $data = Bobot::find($id);
+        if (Bobot::where('keterangan', $request['keterangan'])->where('bobot', $request['bobot'])->where('kriteria', $request['kriteria'])->count() == 1) return back();
+        $data->update(['keterangan' => $request['keterangan'], 'bobot' => $request['bobot'], 'kriteria' => $request['kriteria']]);
+        return back()->with('dataEdited', 'Data berhasil diedit');
     }
 
     /**
@@ -79,8 +86,23 @@ class BobotController extends Controller
      * @param  \App\Models\Bobot  $bobot
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bobot $bobot)
+
+    public function tambah(StoreBobotRequest $request)
     {
-        //
+        if ($request['kriteria'] == null) return back()->with('dataError', 'Kriteria belum ada, silahkan tambah kriteria terlebih dahulu');
+        $bobot = new Bobot;
+        $bobot->keterangan = $request['keterangan'];
+        $bobot->kriteria = $request['kriteria'];
+        $bobot->bobot = $request['bobot'];
+        $bobot->save();
+
+        return back()->with('dataAdded', 'data bobot berhasil ditambah');
+    }
+
+    public function destroy($id)
+    {
+        $data = Bobot::find($id);
+        $data->delete();
+        return back()->with('dataDeleted', 'data bobot berhasil dihapus');
     }
 }

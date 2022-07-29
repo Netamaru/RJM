@@ -12,6 +12,6 @@ class Kriteria extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'kriteria'
+        'kriteria', 'bobot'
     ];
 }

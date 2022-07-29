@@ -38,3 +38,9 @@ route::resource('dashboard/kriteria', KriteriaController::class);
 Route::get('dashboard/kriteria/delete/{id}', [KriteriaController::class, 'destroy'])->name('kriteria.remove')->middleware('auth');
 Route::get('dashboard/kriteria/update/{id}', [KriteriaController::class, 'edit'])->name('kriteria.edit')->middleware('auth');
 Route::get('dashboard/kriteria/create/{param}', [KriteriaController::class, 'tambah'])->name('kriteria.tambah')->middleware('auth');
+
+// bobot
+route::resource('dashboard/input-bobot', BobotController::class);
+Route::get('dashboard/input-bobot/delete/{id}', [BobotController::class, 'destroy'])->name('bobot.remove')->middleware('auth');
+Route::get('dashboard/input-bobot/update/{id}', [BobotController::class, 'edit'])->name('bobot.edit')->middleware('auth');
+Route::get('dashboard/input-bobot/create/', [BobotController::class, 'tambah'])->name('bobot.tambah')->middleware('auth');
