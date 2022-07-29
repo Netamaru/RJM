@@ -24,93 +24,99 @@
     <div class="row justify-content-between">
         <div class="card mb-3 overflow-auto" style="width: 55rem; max-height: 40rem; height: auto">
             <h3 class="pt-3 text-primary">Daftar Bobot</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Keterangan</th>
-                        <th scope="col">Kriteria</th>
-                        <th scope="col">Bobot</th>
-                        <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $number = 0;
-                    @endphp
-                    @foreach ($bobotData as $bobot)
+            <div class="card-body">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <th scope="row">{{ $number += 1 }}</th>
-                            <td>{{ $bobot['keterangan'] }}</td>
-                            <td>{{ $bobot['kriteria'] }}</td>
-                            <td>{{ $bobot['bobot'] }}</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-link text-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editData{{ $bobot->id }}"><i class="bi bi-pencil-fill"></i></button>
+                            <th scope="col">No</th>
+                            <th scope="col">Keterangan</th>
+                            <th scope="col">Kriteria</th>
+                            <th scope="col">Bobot</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $number = 0;
+                        @endphp
+                        @foreach ($bobotData as $bobot)
+                            <tr>
+                                <th scope="row">{{ $number += 1 }}</th>
+                                <td>{{ $bobot['keterangan'] }}</td>
+                                <td>{{ $bobot['kriteria'] }}</td>
+                                <td>{{ $bobot['bobot'] }}</td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-link text-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editData{{ $bobot->id }}"><i
+                                            class="bi bi-pencil-fill"></i></button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="editData{{ $bobot->id }}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Edit data
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="editData{{ $bobot->id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit data
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <form method="post" action="{{ route('bobot.edit', $bobot->id) }}">
+                                                    @csrf
+                                                    {{ method_field('GET') }}
+                                                    <div class="modal-body">
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text"
+                                                                id="basic-addon1">Keterangan</span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Keterangan" name="keterangan" required
+                                                                pattern="\S(.*\S)?" value="{{ $bobot->keterangan }}"
+                                                                aria-label="kriteria">
+                                                        </div>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Kriteria</span>
+                                                            <select class="form-select" aria-label="Kriteria"
+                                                                name="kriteria">
+                                                                @foreach ($kriteriaData as $kriteriaList)
+                                                                    <option value="{!! $kriteriaList['kriteria'] !!}"
+                                                                        {{ $bobot->kriteria == $kriteriaList['kriteria'] ? 'selected' : '' }}>
+                                                                        {{ $kriteriaList['kriteria'] }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Bobot</span>
+                                                            <input type="text" class="form-control" placeholder="Bobot"
+                                                                name="bobot" required pattern="\S(.*\S)?"
+                                                                value="{{ $bobot->bobot }}" aria-label="kriteria">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <form method="post" action="{{ route('bobot.edit', $bobot->id) }}">
-                                                @csrf
-                                                {{ method_field('GET') }}
-                                                <div class="modal-body">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">Keterangan</span>
-                                                        <input type="text" class="form-control" placeholder="Keterangan"
-                                                            name="keterangan" required pattern="\S(.*\S)?"
-                                                            value="{{ $bobot->keterangan }}" aria-label="kriteria">
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">Kriteria</span>
-                                                        <select class="form-select" aria-label="Kriteria" name="kriteria">
-                                                            @foreach ($kriteriaData as $kriteriaList)
-                                                                <option value="{!! $kriteriaList['kriteria'] !!}"
-                                                                    {{ $bobot->kriteria == $kriteriaList['kriteria'] ? 'selected' : '' }}>
-                                                                    {{ $kriteriaList['kriteria'] }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">Bobot</span>
-                                                        <input type="text" class="form-control" placeholder="Bobot"
-                                                            name="bobot" required pattern="\S(.*\S)?"
-                                                            value="{{ $bobot->bobot }}" aria-label="kriteria">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Tutup</button>
-                                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Button hapus -->
-                                <form method="get" action="{{ route('bobot.remove', $bobot->id) }}"
-                                    style="display:inline">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-link text-danger"
-                                        onclick="return confirm ('Apakah anda yakin ingin menghapus data ini?')"><i
-                                            class="bi bi-trash-fill"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                    <!-- Button hapus -->
+                                    <form method="get" action="{{ route('bobot.remove', $bobot->id) }}"
+                                        style="display:inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-link text-danger"
+                                            onclick="return confirm ('Apakah anda yakin ingin menghapus data ini?')"><i
+                                                class="bi bi-trash-fill"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="card mb-3" style="width: 25rem; height: 22rem;">
             <h3 class="mt-3 text-primary">Input Bobot</h3>

@@ -40,9 +40,9 @@ class KriteriaController extends Controller
      */
     public function store(StoreKriteriaRequest $request)
     {
-        if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back()->with('dataError', 'Kriteria <b>' . $request['kriteria'] . '</b> sudah ada di database');
-        Kriteria::Create(['kriteria' => $request['kriteria']]);
-        return back()->with('dataAdded', 'Kriteria <b>' . $request['kriteria'] . '</b> berhasil ditambahkan');
+        // if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back()->with('dataError', 'Kriteria <b>' . $request['kriteria'] . '</b> sudah ada di database');
+        // Kriteria::Create(['kriteria' => $request['kriteria']]);
+        // return back()->with('dataAdded', 'Kriteria <b>' . $request['kriteria'] . '</b> berhasil ditambahkan');
     }
 
     /**
@@ -65,8 +65,8 @@ class KriteriaController extends Controller
     public function edit($id, StoreKriteriaRequest $request)
     {
         $data = Kriteria::find($id);
-        if (Kriteria::where('kriteria', $request['kriteria'])->where('bobot', $request['bobot'])->count() == 1) return back();
-        $data->update(['kriteria' => $request['kriteria'], 'bobot' => $request['bobot']]);
+        if (Kriteria::where('kriteria', $request['kriteria'])->where('bobot', $request['bobot'])->where('tipe', $request['tipe'])->count() == 1) return back();
+        $data->update(['kriteria' => $request['kriteria'], 'bobot' => $request['bobot'], 'tipe' => $request['tipe']]);
         return back()->with('dataEdited', 'Kriteria berhasil diedit');
     }
 
@@ -97,7 +97,7 @@ class KriteriaController extends Controller
     public function tambah(StoreKriteriaRequest $request)
     {
         if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back()->with('dataError', 'Kriteria <b>' . $request['kriteria'] . '</b> sudah ada di database');
-        Kriteria::Create(['kriteria' => $request['kriteria'], 'bobot' => $request['bobot']]);
+        Kriteria::Create(['kriteria' => $request['kriteria'], 'bobot' => $request['bobot'], 'tipe' => $request['tipe']]);
         return back()->with('dataAdded', 'Kriteria <b>' . $request['kriteria'] . '</b> berhasil ditambahkan');
     }
 

@@ -1,4 +1,174 @@
 @extends('layouts.main')
 @section('container')
+    {!! Session::get('dataDeleted')
+        ? '<p class="fs-5 border border-success rounded-1 text-center bg-success bg-opacity-10 w-100 mb-3">' .
+            Session::get('dataDeleted') .
+            '</p>'
+        : '' !!}
+    {!! Session::get('dataEdited')
+        ? '<p class="fs-5 border border-success rounded-1 text-center bg-success bg-opacity-10 w-100 mb-3">' .
+            Session::get('dataEdited') .
+            '</p>'
+        : '' !!}
+    {!! Session::get('dataError')
+        ? '<p class="fs-5 border border-danger rounded-1 text-center bg-danger bg-opacity-10">' .
+            Session::get('dataError') .
+            '</p>'
+        : '' !!}
+    {!! Session::get('dataAdded')
+        ? '<p class="fs-5 border border-success rounded-1 text-center bg-success bg-opacity-10">' .
+            Session::get('dataAdded') .
+            '</p>'
+        : '' !!}
     <h1>Input Data Kayu</h1>
+    <div class="row justify-content-between">
+        <div class="card mb-3 overflow-auto" style="width: 55rem; max-height: 40rem; height: auto">
+            <h3 class="pt-3 text-primary">Daftar Kayu</h3>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Jenis Kayu</th>
+                            <th scope="col">Kadar Air</th>
+                            <th scope="col">Umur Kayu</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $number = 0;
+                        @endphp
+                        @foreach ($kayuData as $kayu)
+                            <tr>
+                                <th scope="row">{{ $number += 1 }}</th>
+                                <td>{{ $kayu->jenis_kayu }}</td>
+                                <td>{{ $kayu->kadar_air }}</td>
+                                <td>{{ $kayu->umur_kayu }}</td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-link text-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editData{{ $kayu->id }}"><i
+                                            class="bi bi-pencil-fill"></i></button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="editData{{ $kayu->id }}" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Edit data</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <form method="post" action="{{ route('kayu.edit', $kayu->id) }}">
+                                                    @csrf
+                                                    {{ method_field('GET') }}
+                                                    <div class="modal-body">
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Jenis
+                                                                Kayu</span>
+                                                            <select class="form-select" aria-label="Jenis Kayu"
+                                                                name="jenis_kayu">
+                                                                @foreach ($bobotData->where('kriteria', 'Jenis Kayu') as $bobot)
+                                                                    <option value="{{ $bobot->keterangan }}"
+                                                                        {{ $bobot->keterangan == $kayu->jenis_kayu ? 'selected' : '' }}>
+                                                                        {{ $bobot->keterangan }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Kadar
+                                                                Air</span>
+                                                            <select class="form-select" aria-label=">Kadar Air"
+                                                                name="kadar_air">
+                                                                @foreach ($bobotData->where('kriteria', 'Kadar Air') as $bobot)
+                                                                    <option value="{{ $bobot->keterangan }}"
+                                                                        {{ $bobot->keterangan == $kayu->kadar_air ? 'selected' : '' }}>
+                                                                        {{ $bobot->keterangan }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Umur
+                                                                Kayu</span>
+                                                            <select class="form-select" aria-label="Umur Kayu"
+                                                                name="umur_kayu">
+                                                                @foreach ($bobotData->where('kriteria', 'Umur Kayu') as $bobot)
+                                                                    <option value="{{ $bobot->keterangan }}"
+                                                                        {{ $bobot->keterangan == $kayu->umur_kayu ? 'selected' : '' }}>
+                                                                        {{ $bobot->keterangan }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Button delete -->
+                                    <form method="get" action="{{ route('kayu.remove', $kayu->id) }}"
+                                        style="display:inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-link text-danger"
+                                            onclick="return confirm ('Apakah anda yakin ingin menghapus data ini?')">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card mb-3" style="width: 25rem; height: 25rem;">
+            <h3 class="pt-3 text-primary">Input Kayu</h3>
+            <div class="container">
+                <form method="post" action="{{ route('kayu.tambah') }}">
+                    @csrf
+                    {{ method_field('GET') }}
+                    <label for="title" class="mt-3">Jenis Kayu</label>
+                    <div class="input-group">
+                        <select class="form-select" id="jenis_kayu" name="jenis_kayu">
+                            @foreach ($bobotData->where('kriteria', 'Jenis Kayu') as $bobot)
+                                <option value="{{ $bobot->keterangan }}">
+                                    {{ $bobot->keterangan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <label for="title" class="mt-3">Kadar Air</label>
+                    <div class="input-group">
+                        <select class="form-select" id="kadar_air" name="kadar_air">
+                            @foreach ($bobotData->where('kriteria', 'Kadar Air') as $bobot)
+                                <option value="{{ $bobot->keterangan }}">
+                                    {{ $bobot->keterangan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <label for="title" class="mt-3">Umur Kayu</label>
+                    <div class="input-group mb-3">
+                        <select class="form-select" id="umur_kayu" name="umur_kayu">
+                            @foreach ($bobotData->where('kriteria', 'Umur Kayu') as $bobot)
+                                <option value="{{ $bobot->keterangan }}">
+                                    {{ $bobot->keterangan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3 mb-3 w-100">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

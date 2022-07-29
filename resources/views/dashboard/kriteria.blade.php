@@ -24,86 +24,102 @@
     <div class="row justify-content-between">
         <div class="card mb-3 overflow-auto" style="width: 55rem; max-height: 40rem; height: auto">
             <h3 class="pt-3 text-primary">Daftar Kriteria</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Pendukung Keputusan</th>
-                        <th scope="col">Kriteria</th>
-                        <th scope="col">Bobot</th>
-                        <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $number = 0;
-                    @endphp
-                    @foreach ($data as $kriteria)
+            <div class="card-body">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <th scope="row">{{ $number += 1 }}</th>
-                            <td>{{ $kriteria->pendukung_keputusan }}</td>
-                            <td>{{ $kriteria->kriteria }}</td>
-                            <td>{{ $kriteria->bobot }}</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-link text-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editData{{ $kriteria->id }}"><i class="bi bi-pencil-fill"></i></button>
+                            <th scope="col">No</th>
+                            <th scope="col">Kriteria</th>
+                            <th scope="col">Tipe</th>
+                            <th scope="col">Bobot</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $number = 0;
+                        @endphp
+                        @foreach ($data as $kriteria)
+                            <tr>
+                                <th scope="row">{{ $number += 1 }}</th>
+                                <td>{{ $kriteria->kriteria }}</td>
+                                <td>{{ $kriteria->tipe }}</td>
+                                <td>{{ $kriteria->bobot }}</td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-link text-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editData{{ $kriteria->id }}"><i
+                                            class="bi bi-pencil-fill"></i></button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="editData{{ $kriteria->id }}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Edit kriteria
-                                                    <b>{{ $kriteria->kriteria }}</b>
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="editData{{ $kriteria->id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit kriteria
+                                                        <b>{{ $kriteria->kriteria }}</b>
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <form method="post" action="{{ route('kriteria.edit', $kriteria->id) }}">
+                                                    @csrf
+                                                    {{ method_field('GET') }}
+                                                    <div class="modal-body">
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Nama
+                                                                Kriteria</span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Kriteria" name="kriteria" required
+                                                                pattern="\S(.*\S)?" value="{{ $kriteria->kriteria }}"
+                                                                aria-label="kriteria">
+                                                            {{ Request::input('kriteria') }}
+                                                        </div>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Bobot</span>
+                                                            <input type="text" class="form-control" placeholder="Bobot"
+                                                                name="bobot" required pattern="\S(.*\S)?"
+                                                                value="{{ $kriteria->bobot }}" aria-label="kriteria">
+                                                        </div>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Tipe</span>
+                                                            <select class="form-select" aria-label="tipe" name="tipe">
+                                                                <option value="benefit"
+                                                                    {{ $kriteria->tipe == 'benefit' ? 'selected' : '' }}>
+                                                                    benefit
+                                                                </option>
+                                                                <option value="cost"
+                                                                    {{ $kriteria->tipe == 'cost' ? 'selected' : '' }}>cost
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <form method="post" action="{{ route('kriteria.edit', $kriteria->id) }}">
-                                                @csrf
-                                                {{ method_field('GET') }}
-                                                <div class="modal-body">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">Nama
-                                                            Kriteria</span>
-                                                        <input type="text" class="form-control" placeholder="Kriteria"
-                                                            name="kriteria" required pattern="\S(.*\S)?"
-                                                            value="{{ $kriteria->kriteria }}" aria-label="kriteria">
-                                                        {{ Request::input('kriteria') }}
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">Bobot</span>
-                                                        <input type="text" class="form-control" placeholder="Bobot"
-                                                            name="bobot" required pattern="\S(.*\S)?"
-                                                            value="{{ $kriteria->bobot }}" aria-label="kriteria">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Tutup</button>
-                                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Button hapus -->
-                                <form method="post" action="{{ route('kriteria.destroy', $kriteria->id) }}"
-                                    style="display:inline">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-link text-danger"
-                                        onclick="return confirm ('Apakah anda yakin ingin menghapus data ini?')"><i
-                                            class="bi bi-trash-fill"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                    <!-- Button hapus -->
+                                    <form method="post" action="{{ route('kriteria.destroy', $kriteria->id) }}"
+                                        style="display:inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-link text-danger"
+                                            onclick="return confirm ('Apakah anda yakin ingin menghapus data ini?')"><i
+                                                class="bi bi-trash-fill"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="card mb-3" style="width: 25rem; height: 21rem;">
             <h3 class="mt-3 text-primary">Input Kriteria</h3>
@@ -114,13 +130,17 @@
                     <label for="title" class="mt-3">Nama Kriteria</label>
                     <input type="text" class="form-control" placeholder="Masukkan Nama..." aria-label="kriteria"
                         id="kriteria" name="kriteria" required pattern="\S(.*\S)?">
-                    <fieldset disabled>
-                        <label for="disabledTextInput" class="mt-3">Nama Atribut</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Pemilihan Kayu">
-                    </fieldset>
+                    <label for="title" class="mt-3">Tipe</label>
+                    <div class="input-group">
+                        <select class="form-select" id="tipe" name="tipe">
+                            <option value="benefit" selected>benefit</option>
+                            <option value="cost">cost</option>
+                        </select>
+                    </div>
                     <label for="bobot" class="mt-3">bobot&nbsp;&nbsp;&nbsp;</label>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="bobot" id="bobot" value="1" checked>
+                        <input class="form-check-input" type="radio" name="bobot" id="bobot" value="1"
+                            checked>
                         <label class="form-check-label" for="inlineRadio1">1</label>
                     </div>
                     <div class="form-check form-check-inline">

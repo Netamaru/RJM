@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('jenis_kayu');
             $table->string('kadar_air');
-            $table->integer('umur_kayu');
+            $table->string('umur_kayu');
             $table->timestamps();
         });
     }

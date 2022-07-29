@@ -44,3 +44,9 @@ route::resource('dashboard/input-bobot', BobotController::class);
 Route::get('dashboard/input-bobot/delete/{id}', [BobotController::class, 'destroy'])->name('bobot.remove')->middleware('auth');
 Route::get('dashboard/input-bobot/update/{id}', [BobotController::class, 'edit'])->name('bobot.edit')->middleware('auth');
 Route::get('dashboard/input-bobot/create/', [BobotController::class, 'tambah'])->name('bobot.tambah')->middleware('auth');
+
+// kayu
+route::resource('dashboard/input-kayu', KayuController::class);
+Route::get('dashboard/input-kayu/delete/{id}', [KayuController::class, 'destroy'])->name('kayu.remove')->middleware('auth');
+Route::get('dashboard/input-kayu/update/{id}', [KayuController::class, 'edit'])->name('kayu.edit')->middleware('auth');
+Route::get('dashboard/input-kayu/create/', [KayuController::class, 'tambah'])->name('kayu.tambah')->middleware('auth');
