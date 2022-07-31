@@ -28,11 +28,11 @@
                     <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" style="text-align: center">
                         <i class="bi bi-grid-3x3-gap-fill"></i>
-                        <br> Data Kayu
+                        <br>Input Data
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/dashboard/input-kayu">Input Kayu</a></li>
                         <li><a class="dropdown-item" href="/dashboard/input-bobot">Input Bobot</a></li>
+                        <li><a class="dropdown-item" href="/dashboard/input-kayu">Input Kayu</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

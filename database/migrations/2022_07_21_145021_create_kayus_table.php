@@ -15,9 +15,26 @@ return new class extends Migration
     {
         Schema::create('kayus', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_kayu');
-            $table->string('kadar_air');
-            $table->string('umur_kayu');
+            $table->string('data1');
+            $table->integer('bobot1');
+            $table->string('data2');
+            $table->integer('bobot2');
+            $table->string('data3');
+            $table->integer('bobot3');
+            $table->string('data4')->nullable();
+            $table->integer('bobot4')->nullable();
+            $table->string('data5')->nullable();
+            $table->integer('bobot5')->nullable();
+            $table->string('data6')->nullable();
+            $table->integer('bobot6')->nullable();
+            $table->string('data7')->nullable();
+            $table->integer('bobot7')->nullable();
+            $table->string('data8')->nullable();
+            $table->integer('bobot8')->nullable();
+            $table->string('data9')->nullable();
+            $table->integer('bobot9')->nullable();
+            $table->string('data10')->nullable();
+            $table->integer('bobot10')->nullable();
             $table->timestamps();
         });
     }

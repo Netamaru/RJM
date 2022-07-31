@@ -42,9 +42,9 @@
                         @foreach ($kayuData as $kayu)
                             <tr>
                                 <th scope="row">{{ $number += 1 }}</th>
-                                <td>{{ $kayu->jenis_kayu }}</td>
-                                <td>{{ $kayu->kadar_air }}</td>
-                                <td>{{ $kayu->umur_kayu }}</td>
+                                <td>{{ $kayu->data1 }}</td>
+                                <td>{{ $kayu->data2 }}</td>
+                                <td>{{ $kayu->data3 }}</td>
                                 <td>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-link text-warning" data-bs-toggle="modal"
@@ -139,7 +139,23 @@
                 <form method="post" action="{{ route('kayu.tambah') }}">
                     @csrf
                     {{ method_field('GET') }}
-                    <label for="title" class="mt-3">Jenis Kayu</label>
+                    @php
+                        $nomor = 0;
+                    @endphp
+                    @foreach ($kriteriaData as $kriteria)
+                        <label for="title" class="mt-3">{{ $kriteria->kriteria }}</label>
+                        <div class="input-group">
+                            <select class="form-select" id="{{ str_replace(' ', '_', $kriteria->kriteria) }}"
+                                name="{{ str_replace(' ', '_', $kriteria->kriteria) }}">
+                                @foreach ($bobotData->where('kriteria', $kriteria->kriteria) as $bobot)
+                                    <option value="{{ $bobot->keterangan }}">
+                                        {{ $bobot->keterangan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endforeach
+
+                    {{-- <label for="title" class="mt-3">Jenis Kayu</label>
                     <div class="input-group">
                         <select class="form-select" id="jenis_kayu" name="jenis_kayu">
                             @foreach ($bobotData->where('kriteria', 'Jenis Kayu') as $bobot)
@@ -165,7 +181,7 @@
                                     {{ $bobot->keterangan }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <button type="submit" class="btn btn-primary mt-3 mb-3 w-100">Simpan</button>
                 </form>
             </div>
