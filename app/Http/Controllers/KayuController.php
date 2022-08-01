@@ -64,14 +64,14 @@ class KayuController extends Controller
      */
     public function edit($id, StoreKayuRequest $request)
     {
-        // @dd($request);
         $data = Kayu::find($id);
-        if (Kayu::where('jenis_kayu', $request['jenis_kayu'])->where('kadar_air', $request['kadar_air'])->where('umur_kayu', $request['umur_kayu'])->count() >= 1) return back();
-        $data->jenis_kayu = $request['jenis_kayu'];
-        $data->kadar_air = $request['kadar_air'];
-        $data->umur_kayu = $request['umur_kayu'];
-        $data->save();
-        return back()->with('dataAdded', 'Data kayu berhasil diedit');
+        if (Kayu::where('data1', $request['jenis_kayu'])->where('data2', $request['kadar_air'])->where('data3', $request['umur_kayu'])->count() >= 1) return back();
+        $bobot = new Bobot();
+        $getBobot1 = $bobot->where('keterangan', $request['Jenis_Kayu'])->value('bobot');
+        $getBobot2 = $bobot->where('keterangan', $request['Kadar_Air'])->value('bobot');
+        $getBobot3 = $bobot->where('keterangan', $request['Umur_Kayu'])->value('bobot');
+        $data->update(['data1' => $request['Jenis_Kayu'], 'data2' => $request['Kadar_Air'], 'data3' => $request['Umur_Kayu'], 'bobot1' => $getBobot1, 'bobot2' => $getBobot2, 'bobot3' => $getBobot3]);
+        return back()->with('dataEdited', 'Data kayu berhasil diedit');
     }
 
     /**

@@ -70,7 +70,7 @@
                                                             <span class="input-group-text" id="basic-addon1">Jenis
                                                                 Kayu</span>
                                                             <select class="form-select" aria-label="Jenis Kayu"
-                                                                name="jenis_kayu">
+                                                                name="Jenis_Kayu">
                                                                 @foreach ($bobotData->where('kriteria', 'Jenis Kayu') as $bobot)
                                                                     <option value="{{ $bobot->keterangan }}"
                                                                         {{ $bobot->keterangan == $kayu->jenis_kayu ? 'selected' : '' }}>
@@ -83,7 +83,7 @@
                                                             <span class="input-group-text" id="basic-addon1">Kadar
                                                                 Air</span>
                                                             <select class="form-select" aria-label=">Kadar Air"
-                                                                name="kadar_air">
+                                                                name="Kadar_Air">
                                                                 @foreach ($bobotData->where('kriteria', 'Kadar Air') as $bobot)
                                                                     <option value="{{ $bobot->keterangan }}"
                                                                         {{ $bobot->keterangan == $kayu->kadar_air ? 'selected' : '' }}>
@@ -96,7 +96,7 @@
                                                             <span class="input-group-text" id="basic-addon1">Umur
                                                                 Kayu</span>
                                                             <select class="form-select" aria-label="Umur Kayu"
-                                                                name="umur_kayu">
+                                                                name="Umur_Kayu">
                                                                 @foreach ($bobotData->where('kriteria', 'Umur Kayu') as $bobot)
                                                                     <option value="{{ $bobot->keterangan }}"
                                                                         {{ $bobot->keterangan == $kayu->umur_kayu ? 'selected' : '' }}>
@@ -154,34 +154,6 @@
                             </select>
                         </div>
                     @endforeach
-
-                    {{-- <label for="title" class="mt-3">Jenis Kayu</label>
-                    <div class="input-group">
-                        <select class="form-select" id="jenis_kayu" name="jenis_kayu">
-                            @foreach ($bobotData->where('kriteria', 'Jenis Kayu') as $bobot)
-                                <option value="{{ $bobot->keterangan }}">
-                                    {{ $bobot->keterangan }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <label for="title" class="mt-3">Kadar Air</label>
-                    <div class="input-group">
-                        <select class="form-select" id="kadar_air" name="kadar_air">
-                            @foreach ($bobotData->where('kriteria', 'Kadar Air') as $bobot)
-                                <option value="{{ $bobot->keterangan }}">
-                                    {{ $bobot->keterangan }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <label for="title" class="mt-3">Umur Kayu</label>
-                    <div class="input-group mb-3">
-                        <select class="form-select" id="umur_kayu" name="umur_kayu">
-                            @foreach ($bobotData->where('kriteria', 'Umur Kayu') as $bobot)
-                                <option value="{{ $bobot->keterangan }}">
-                                    {{ $bobot->keterangan }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
                     <button type="submit" class="btn btn-primary mt-3 mb-3 w-100">Simpan</button>
                 </form>
             </div>

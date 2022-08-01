@@ -78,14 +78,14 @@
     }
     @endphp
 
-    <h1>Perhitungan</h1>
+    <h1 class="text-center">Perhitungan</h1>
     <div class="position-relative">
-        <div class="card position-absolute top-0 start-50 translate-middle-x overflow-auto"
+        <div class="card position-absolute top-0 start-50 translate-middle-x overflow-auto mt-3"
             style="width: 50rem; max-height: 45rem; height: auto">
-            <div class="card-body">
+            <div class="card-body text-center mx-auto" style="width: 30rem">
 
-                <h5 class="card-title pt-3">Kriteria Bobot</h5>
-                <table class="table">
+                <h5 class="card-title pt-3 fw-bold">Kriteria Bobot</h5>
+                <table class="table table-bordered border-primary table-striped">
                     <thead>
 
                         <tr>
@@ -108,8 +108,8 @@
                     </tbody>
                 </table>
 
-                <h5 class="card-title pt-3">Matrik Awal</h5>
-                <table class="table">
+                <h5 class="card-title pt-3 fw-bold">Matrik Awal</h5>
+                <table class="table table-bordered border-primary table-striped">
                     <thead>
 
                         <tr>
@@ -134,8 +134,8 @@
                     </tbody>
                 </table>
 
-                <h5 class="card-title pt-3">Matrik Normalisasi</h5>
-                <table class="table">
+                <h5 class="card-title pt-3 fw-bold">Matrik Normalisasi</h5>
+                <table class="table table-bordered border-primary table-striped">
                     <thead>
 
                         <tr>
@@ -158,8 +158,8 @@
                     </tbody>
                 </table>
 
-                <h5 class="card-title pt-3">Perhitungan Akhir</h5>
-                <table class="table">
+                <h5 class="card-title pt-3 fw-bold">Perhitungan Akhir</h5>
+                <table class="table table-bordered border-primary table-striped">
                     <thead>
 
                         <tr>
