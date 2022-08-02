@@ -29,9 +29,9 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Jenis Kayu</th>
-                            <th scope="col">Kadar Air</th>
-                            <th scope="col">Umur Kayu</th>
+                            <th scope="col">Kriteria 1</th>
+                            <th scope="col">Kriteria 2</th>
+                            <th scope="col">Kriteria 3</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -67,10 +67,10 @@
                                                     {{ method_field('GET') }}
                                                     <div class="modal-body">
                                                         <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">Jenis
-                                                                Kayu</span>
+                                                            <span class="input-group-text" id="basic-addon1">Kriteria
+                                                                1</span>
                                                             <select class="form-select" aria-label="Jenis Kayu"
-                                                                name="Jenis_Kayu">
+                                                                name="data1">
                                                                 @foreach ($bobotData->where('kriteria', 'Jenis Kayu') as $bobot)
                                                                     <option value="{{ $bobot->keterangan }}"
                                                                         {{ $bobot->keterangan == $kayu->jenis_kayu ? 'selected' : '' }}>
@@ -80,10 +80,10 @@
                                                         </div>
 
                                                         <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">Kadar
-                                                                Air</span>
+                                                            <span class="input-group-text" id="basic-addon1">Kriteria
+                                                                2</span>
                                                             <select class="form-select" aria-label=">Kadar Air"
-                                                                name="Kadar_Air">
+                                                                name="data2">
                                                                 @foreach ($bobotData->where('kriteria', 'Kadar Air') as $bobot)
                                                                     <option value="{{ $bobot->keterangan }}"
                                                                         {{ $bobot->keterangan == $kayu->kadar_air ? 'selected' : '' }}>
@@ -93,10 +93,10 @@
                                                         </div>
 
                                                         <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">Umur
-                                                                Kayu</span>
+                                                            <span class="input-group-text" id="basic-addon1">Kriteria
+                                                                3</span>
                                                             <select class="form-select" aria-label="Umur Kayu"
-                                                                name="Umur_Kayu">
+                                                                name="data3">
                                                                 @foreach ($bobotData->where('kriteria', 'Umur Kayu') as $bobot)
                                                                     <option value="{{ $bobot->keterangan }}"
                                                                         {{ $bobot->keterangan == $kayu->umur_kayu ? 'selected' : '' }}>
@@ -140,13 +140,12 @@
                     @csrf
                     {{ method_field('GET') }}
                     @php
-                        $nomor = 0;
+                        $nomor = 1;
                     @endphp
                     @foreach ($kriteriaData as $kriteria)
                         <label for="title" class="mt-3">{{ $kriteria->kriteria }}</label>
                         <div class="input-group">
-                            <select class="form-select" id="{{ str_replace(' ', '_', $kriteria->kriteria) }}"
-                                name="{{ str_replace(' ', '_', $kriteria->kriteria) }}">
+                            <select class="form-select" id="data{{ $nomor }}" name="data{{ $nomor++ }}">
                                 @foreach ($bobotData->where('kriteria', $kriteria->kriteria) as $bobot)
                                     <option value="{{ $bobot->keterangan }}">
                                         {{ $bobot->keterangan }}</option>

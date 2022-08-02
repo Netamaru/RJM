@@ -65,12 +65,12 @@ class KayuController extends Controller
     public function edit($id, StoreKayuRequest $request)
     {
         $data = Kayu::find($id);
-        if (Kayu::where('data1', $request['jenis_kayu'])->where('data2', $request['kadar_air'])->where('data3', $request['umur_kayu'])->count() >= 1) return back();
+        if (Kayu::where('data1', $request['data1'])->where('data2', $request['data1'])->where('data3', $request['data1'])->count() >= 1) return back();
         $bobot = new Bobot();
-        $getBobot1 = $bobot->where('keterangan', $request['Jenis_Kayu'])->value('bobot');
-        $getBobot2 = $bobot->where('keterangan', $request['Kadar_Air'])->value('bobot');
-        $getBobot3 = $bobot->where('keterangan', $request['Umur_Kayu'])->value('bobot');
-        $data->update(['data1' => $request['Jenis_Kayu'], 'data2' => $request['Kadar_Air'], 'data3' => $request['Umur_Kayu'], 'bobot1' => $getBobot1, 'bobot2' => $getBobot2, 'bobot3' => $getBobot3]);
+        $getBobot1 = $bobot->where('keterangan', $request['data1'])->value('bobot');
+        $getBobot2 = $bobot->where('keterangan', $request['data2'])->value('bobot');
+        $getBobot3 = $bobot->where('keterangan', $request['data3'])->value('bobot');
+        $data->update(['data1' => $request['data1'], 'data2' => $request['data2'], 'data3' => $request['data3'], 'bobot1' => $getBobot1, 'bobot2' => $getBobot2, 'bobot3' => $getBobot3]);
         return back()->with('dataEdited', 'Data kayu berhasil diedit');
     }
 
@@ -88,21 +88,24 @@ class KayuController extends Controller
 
     public function tambah(StoreKayuRequest $request)
     {
-        if ($request['Umur_Kayu'] == null || $request['Kadar_Air'] == null || $request['Jenis_Kayu'] == null) return back()->with('dataError', 'Data kayu belum ada, silahkan tambah data melalui menu input bobot');
-        if (Kayu::where('data1', $request['Jenis_Kayu'])->where('data2', $request['Kadar_Air'])->where('data3', $request['Umur_Kayu'])->count() >= 1) return back()->with('dataError', 'Data sudah ada di database');
+        $requestData = $request->all();
+        $requestCount = count($requestData) - 2;
+
+        if ($request['data1'] == null || $request['data2'] == null || $request['data3'] == null) return back()->with('dataError', 'Data kayu belum ada, silahkan tambah data melalui menu input bobot');
+        if (Kayu::where('data1', $request['data1'])->where('data2', $request['data2'])->where('data3', $request['data3'])->count() >= 1) return back()->with('dataError', 'Data sudah ada di database');
 
         $bobot = new Bobot();
-        $getBobot1 = $bobot->where('keterangan', $request['Jenis_Kayu'])->value('bobot');
-        $getBobot2 = $bobot->where('keterangan', $request['Kadar_Air'])->value('bobot');
-        $getBobot3 = $bobot->where('keterangan', $request['Umur_Kayu'])->value('bobot');
+        $getBobot1 = $bobot->where('keterangan', $request['data1'])->value('bobot');
+        $getBobot2 = $bobot->where('keterangan', $request['data2'])->value('bobot');
+        $getBobot3 = $bobot->where('keterangan', $request['data3'])->value('bobot');
 
         $kayu = new Kayu();
-        $kayu->data1 = $request['Jenis_Kayu'];
-        $kayu->data2 = $request['Kadar_Air'];
-        $kayu->data3 = $request['Umur_Kayu'];
         $kayu->bobot1 = $getBobot1;
         $kayu->bobot2 = $getBobot2;
         $kayu->bobot3 = $getBobot3;
+        for ($i = 1; $i <= $requestCount; $i++) {
+            $kayu->{'data' . $i} = $request['data' . $i];
+        }
         $kayu->save();
 
         return back()->with('dataAdded', 'Data kayu berhasil ditambah');

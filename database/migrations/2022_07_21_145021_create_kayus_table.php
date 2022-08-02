@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('kayus', function (Blueprint $table) {
             $table->id();
-            $table->string('data1');
-            $table->integer('bobot1');
-            $table->string('data2');
-            $table->integer('bobot2');
-            $table->string('data3');
-            $table->integer('bobot3');
+            $table->string('data1')->nullable();
+            $table->integer('bobot1')->nullable();
+            $table->string('data2')->nullable();
+            $table->integer('bobot2')->nullable();
+            $table->string('data3')->nullable();
+            $table->integer('bobot3')->nullable();
             $table->string('data4')->nullable();
             $table->integer('bobot4')->nullable();
             $table->string('data5')->nullable();
