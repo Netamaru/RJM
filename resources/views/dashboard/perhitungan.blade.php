@@ -78,11 +78,11 @@
     }
     @endphp
 
-    <h1 class="text-center">Perhitungan</h1>
+    <h2 class="text-center">Perhitungan</h2>
     <div class="position-relative">
-        <div class="card position-absolute top-0 start-50 translate-middle-x overflow-auto mt-3"
-            style="width: 50rem; max-height: 45rem; height: auto">
-            <div class="card-body text-center mx-auto" style="width: 30rem">
+        <div class="card position-absolute top-0 start-50 translate-middle-x overflow-auto"
+            style="width: auto; max-height: 100rem; height: auto">
+            <div class="card-body text-center mx-auto" style="width: 25rem">
 
                 <h5 class="card-title pt-3 fw-bold">Kriteria Bobot</h5>
                 <table class="table table-bordered border-primary table-striped">

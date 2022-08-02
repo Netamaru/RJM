@@ -53,6 +53,7 @@
 
                                     <!-- Modal -->
                                     <div class="modal fade" id="editData{{ $kriteria->id }}" tabindex="-1"
+                                        data-bs-backdrop="static" data-bs-keyboard="false"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
@@ -77,12 +78,6 @@
                                                             {{ Request::input('kriteria') }}
                                                         </div>
                                                         <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">Bobot</span>
-                                                            <input type="text" class="form-control" placeholder="Bobot"
-                                                                name="bobot" required pattern="\S(.*\S)?"
-                                                                value="{{ $kriteria->bobot }}" aria-label="kriteria">
-                                                        </div>
-                                                        <div class="input-group mb-3">
                                                             <span class="input-group-text" id="basic-addon1">Tipe</span>
                                                             <select class="form-select" aria-label="tipe" name="tipe">
                                                                 <option value="benefit"
@@ -93,6 +88,25 @@
                                                                     {{ $kriteria->tipe == 'cost' ? 'selected' : '' }}>cost
                                                                 </option>
                                                             </select>
+                                                        </div>
+                                                        <label for="bobot" class="">Bobot&nbsp;&nbsp;&nbsp;</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="bobot"
+                                                                id="bobot" value="1"
+                                                                {{ $kriteria->bobot == 1 ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="inlineRadio1">1</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="bobot"
+                                                                id="bobot" value="2"
+                                                                {{ $kriteria->bobot == 2 ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="inlineRadio2">2</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="bobot"
+                                                                id="bobot" value="3"
+                                                                {{ $kriteria->bobot == 3 ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="inlineRadio3">3</label>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -151,7 +165,8 @@
                         <input class="form-check-input" type="radio" name="bobot" id="bobot" value="3">
                         <label class="form-check-label" for="inlineRadio3">3</label>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3 mb-3 w-100">Simpan</button>
+                    <button type="submit" class="btn btn-primary mt-3 mb-3 w-100"
+                        {{ $kriteria->count() == 3 ? 'disabled' : '' }}>Simpan</button>
                 </form>
             </div>
         </div>

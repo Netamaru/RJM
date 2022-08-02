@@ -62,49 +62,32 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
+
+                                                @php
+                                                    $nomorA = 0;
+                                                    $nomorB = 0;
+                                                @endphp
                                                 <form method="post" action="{{ route('kayu.edit', $kayu->id) }}">
                                                     @csrf
                                                     {{ method_field('GET') }}
                                                     <div class="modal-body">
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">Kriteria
-                                                                1</span>
-                                                            <select class="form-select" aria-label="Jenis Kayu"
-                                                                name="data1">
-                                                                @foreach ($bobotData->where('kriteria', 'Jenis Kayu') as $bobot)
-                                                                    <option value="{{ $bobot->keterangan }}"
-                                                                        {{ $bobot->keterangan == $kayu->jenis_kayu ? 'selected' : '' }}>
-                                                                        {{ $bobot->keterangan }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">Kriteria
-                                                                2</span>
-                                                            <select class="form-select" aria-label=">Kadar Air"
-                                                                name="data2">
-                                                                @foreach ($bobotData->where('kriteria', 'Kadar Air') as $bobot)
-                                                                    <option value="{{ $bobot->keterangan }}"
-                                                                        {{ $bobot->keterangan == $kayu->kadar_air ? 'selected' : '' }}>
-                                                                        {{ $bobot->keterangan }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">Kriteria
-                                                                3</span>
-                                                            <select class="form-select" aria-label="Umur Kayu"
-                                                                name="data3">
-                                                                @foreach ($bobotData->where('kriteria', 'Umur Kayu') as $bobot)
-                                                                    <option value="{{ $bobot->keterangan }}"
-                                                                        {{ $bobot->keterangan == $kayu->umur_kayu ? 'selected' : '' }}>
-                                                                        {{ $bobot->keterangan }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
+                                                        @foreach ($kriteriaData as $kriteria)
+                                                            @php
+                                                                $_temp = $kriteria->kriteria;
+                                                            @endphp
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">Kriteria
+                                                                    {{ $nomorA += 1 }}</span>
+                                                                <select class="form-select" aria-label="{{ $_temp }}"
+                                                                    name="data{{ $nomorB += 1 }}">
+                                                                    @foreach ($bobotData->where('kriteria', $_temp) as $bobot)
+                                                                        <option value="{{ $bobot->keterangan }}"
+                                                                            {{ $bobot->keterangan == $kayu->{'data' . $nomorB} ? 'selected' : '' }}>
+                                                                            {{ $bobot->keterangan }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        @endforeach
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"

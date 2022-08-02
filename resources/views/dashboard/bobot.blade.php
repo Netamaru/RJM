@@ -53,6 +53,7 @@
 
                                     <!-- Modal -->
                                     <div class="modal fade" id="editData{{ $bobot->id }}" tabindex="-1"
+                                        data-bs-backdrop="static" data-bs-keyboard="false"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
@@ -85,11 +86,24 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">Bobot</span>
-                                                            <input type="text" class="form-control" placeholder="Bobot"
-                                                                name="bobot" required pattern="\S(.*\S)?"
-                                                                value="{{ $bobot->bobot }}" aria-label="kriteria">
+                                                        <label for="bobot" class="">Bobot&nbsp;&nbsp;&nbsp;</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="bobot"
+                                                                id="bobot" value="1"
+                                                                {{ $bobot->bobot == 1 ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="inlineRadio1">1</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="bobot"
+                                                                id="bobot" value="2"
+                                                                {{ $bobot->bobot == 2 ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="inlineRadio2">2</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="bobot"
+                                                                id="bobot" value="3"
+                                                                {{ $bobot->bobot == 3 ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="inlineRadio3">3</label>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -125,8 +139,8 @@
                     @csrf
                     {{ method_field('GET') }}
                     <label for="title" class="mt-3">Keterangan</label>
-                    <input type="text" class="form-control" placeholder="Masukkan Keterangan..." aria-label="keterangan"
-                        id="keterangan" name="keterangan" required pattern="\S(.*\S)?">
+                    <input type="text" class="form-control" placeholder="Masukkan Keterangan..."
+                        aria-label="keterangan" id="keterangan" name="keterangan" required pattern="\S(.*\S)?">
                     <label for="title" class="mt-3">Kriteria</label>
                     <div class="input-group mb-3">
                         <select class="form-select" id="kriteria" name="kriteria">

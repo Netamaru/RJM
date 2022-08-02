@@ -91,7 +91,7 @@ class KayuController extends Controller
         $requestData = $request->all();
         $requestCount = count($requestData) - 2;
 
-        if ($request['data1'] == null || $request['data2'] == null || $request['data3'] == null) return back()->with('dataError', 'Data kayu belum ada, silahkan tambah data melalui menu input bobot');
+        if ($request['data1'] == null || $request['data2'] == null || $request['data3'] == null) return back()->with('dataError', 'Data kayu belum lengkap, silahkan tambah data melalui menu input bobot');
         if (Kayu::where('data1', $request['data1'])->where('data2', $request['data2'])->where('data3', $request['data3'])->count() >= 1) return back()->with('dataError', 'Data sudah ada di database');
 
         $bobot = new Bobot();
