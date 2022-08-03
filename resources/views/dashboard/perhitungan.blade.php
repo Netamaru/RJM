@@ -6,6 +6,7 @@
     $nomorC = 0;
     $nomorD = 0;
     $nomorE = 0;
+    $nomorF = 1;
 
     $_bobot = [];
     $_maxC1 = $kayuData->max('bobot1');
@@ -80,111 +81,91 @@
 
     <h2 class="text-center">Perhitungan</h2>
     <div class="position-relative">
-        <div class="card position-absolute top-0 start-50 translate-middle-x overflow-auto"
-            style="width: auto; max-height: 100rem; height: auto">
-            <div class="card-body text-center mx-auto" style="width: 25rem">
+            <div class="text-center mx-auto" style="width: auto; max-width: 35rem">
 
                 <h5 class="card-title pt-3 fw-bold">Kriteria Bobot</h5>
-                <table class="table table-bordered border-primary table-striped">
+                <table class="table table-bordered table-hover">
                     <thead>
-
-                        <tr>
+                        <tr class="table-secondary">
                             <th scope="col">Kriteria</th>
                             <th scope="col">Bobot</th>
                             <th scope="col"></th>
                         </tr>
-
                     </thead>
                     <tbody>
-
                         @foreach ($kriteriaData as $kriteria)
                             <tr>
-                                <td>{{ $kriteria->kriteria . ' (C' . ($nomorB += 1) . ')' }}</td>
-                                <td>{{ $kriteria->bobot }}</td>
-                                <td><b>{{ $kriteria->tipe }}</b></td>
+                                <td class="{{ $kriteria->tipe == "cost" ? 'table-warning' : 'table-success'}}"><b> {{ $kriteria->kriteria . ' (C' . ($nomorB += 1) . ')' }}</b></td>
+                                <td class="{{ $kriteria->tipe == "cost" ? 'table-warning' : 'table-success'}}">{{ $kriteria->bobot }}</td>
+                                <td class="{{ $kriteria->tipe == "cost" ? 'table-warning' : 'table-success'}}"><b>{{ $kriteria->tipe }}</b></td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
 
                 <h5 class="card-title pt-3 fw-bold">Matrik Awal</h5>
-                <table class="table table-bordered border-primary table-striped">
+                <table class="table table-bordered table-hover">
                     <thead>
-
-                        <tr>
+                        <tr class="table-secondary">
                             <th scope="col">No</th>
                             <th scope="col">C1</th>
                             <th scope="col">C2</th>
                             <th scope="col">C3</th>
                         </tr>
-
                     </thead>
                     <tbody>
-
                         @foreach ($kayuData as $kayu)
                             <tr>
                                 <th scope="row">{{ $nomorA += 1 }}</th>
-                                <td>{{ $kayu->bobot1 }}</td>
-                                <td>{{ $kayu->bobot2 }}</td>
-                                <td>{{ $kayu->bobot3 }}</td>
+                                <td class="{{ $kriteriaData->where('kriteria', $bobotData->where('keterangan', $kayu->data1)->value('kriteria'))->value('tipe') == 'cost' ? 'table-warning' : ''}}">{{ $kayu->bobot1 }}</td>
+                                <td class="{{ $kriteriaData->where('kriteria', $bobotData->where('keterangan', $kayu->data2)->value('kriteria'))->value('tipe') == 'cost' ? 'table-warning' : ''}}">{{ $kayu->bobot2 }}</td>
+                                <td class="{{ $kriteriaData->where('kriteria', $bobotData->where('keterangan', $kayu->data3)->value('kriteria'))->value('tipe') == 'cost' ? 'table-warning' : ''}}">{{ $kayu->bobot3 }}</td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
 
                 <h5 class="card-title pt-3 fw-bold">Matrik Normalisasi</h5>
-                <table class="table table-bordered border-primary table-striped">
+                <table class="table table-bordered table-hover">
                     <thead>
-
-                        <tr>
+                        <tr class="table-secondary">
+                            <th scope="col">No</th>
                             <th scope="col">C1</th>
                             <th scope="col">C2</th>
                             <th scope="col">C3</th>
                         </tr>
-
                     </thead>
                     <tbody>
-
                         @foreach ($nC1 as $data)
                             <tr>
+                                <td><b>{{ $nomorF++ }}<b></td>
                                 <td>{{ $nC1[$nomorC] }}</td>
                                 <td>{{ $nC2[$nomorC] }}</td>
                                 <td>{{ $nC3[$nomorC++] }}</td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
 
                 <h5 class="card-title pt-3 fw-bold">Perhitungan Akhir</h5>
-                <table class="table table-bordered border-primary table-striped">
+                <table class="table table-bordered table-hover">
                     <thead>
-
-                        <tr>
+                        <tr class="table-secondary">
                             <th scope="col">No</th>
                             <th scope="col">Nilai</th>
                             <th scope="col">Ranking</th>
                         </tr>
-
                     </thead>
                     <tbody>
-                        @php
-
-                        @endphp
-
                         @foreach ($nilai as $data)
                             <tr>
-                                <th scope="row">{{ $nomorD += 1 }}</th>
-                                <td>{{ $data }}</td>
-                                <td>{{ $ranking[$nomorE++] }}</td>
+                                <th scope="row" class="{{ $ranking[$nomorE] == 1 ? 'table-success' : '' }}">{{ $nomorD += 1 }}</th>
+                                <td class="{{ $ranking[$nomorE] == 1 ? 'table-success' : '' }}">{{ $data }}</td>
+                                <td class="{{ $ranking[$nomorE] == 1 ? 'table-success' : '' }}">{{ $ranking[$nomorE++] }}</td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
-            </div>
-        </div>
+
     </div>
 @endsection
