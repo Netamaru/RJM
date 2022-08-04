@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('kayus', function (Blueprint $table) {
             $table->id();
+            $table->string('nilai')->nullable();
             $table->string('data1')->nullable();
             $table->integer('bobot1')->nullable();
             $table->string('data2')->nullable();

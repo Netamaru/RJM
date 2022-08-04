@@ -46,10 +46,12 @@
                 <li class="nav-item">
                     <form action="/logout" method="GET">
                         @csrf
-                        <button type="submit" href="/logout" class="nav-link text-white btn">
+                        <div class="d-flex justify-content-center">
+                        <button type="submit" href="/logout" class="nav-link text-white btn border-0">
                             <i class="bi bi-grid-3x3-gap-fill"></i>
                             <br>logout
                         </button>
+                        </div>
                     </form>
                 </li>
             </ul>
