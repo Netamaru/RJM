@@ -3,7 +3,7 @@
 <h2 class="text-center">Laporan</h2>
 <div class="position-relative">
 <div class="card mx-auto" style="width: auto; height: auto; max-width: 20rem">
-    <div class="card-body d-flex justify-content-between">
+    <div class="card-body justify-content-between">
         <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Pilih data kayu</span>
         <select class="form-select" aria-label="Data Kayu" id="kayu">
@@ -46,10 +46,10 @@
             </div>
           </div>
         @endforeach
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width: 18rem">
+            Tampilkan
+          </button>
       </div>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Tampilkan
-      </button>
     </div>
   <script>
     var e = document.getElementById("kayu");
