@@ -13,6 +13,7 @@ class LaporanController extends Controller
         return view('dashboard.laporan', [
             'kayuData' => Kayu::all(),
             'bobotData' => new Bobot(),
+            'title' => 'Laporan'
         ]);
     }
 }

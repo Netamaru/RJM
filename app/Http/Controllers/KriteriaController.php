@@ -17,7 +17,8 @@ class KriteriaController extends Controller
     {
         return view('dashboard.kriteria', [
             'data' => Kriteria::all(),
-            'kriteria' => Kriteria::all()
+            'kriteria' => Kriteria::all(),
+            'title' => 'Kriteria'
         ]);
     }
 

@@ -11,7 +11,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        return view('dashboard', [
+            'title' => 'Home'
+        ]);
     }
 
     public function perhitungan()
@@ -20,6 +22,7 @@ class DashboardController extends Controller
             'bobotData' => Bobot::all(),
             'kriteriaData' => Kriteria::all(),
             'kayuData' => Kayu::all(),
+            'title' => 'Perhitungan'
         ]);
     }
 }

@@ -5,7 +5,7 @@
 <div class="card mx-auto" style="width: auto; height: auto; max-width: 20rem">
     <div class="card-body justify-content-between">
         <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Pilih data kayu</span>
+        <span class="input-group-text" id="basic-addon1">Data Kayu</span>
         <select class="form-select" aria-label="Data Kayu" id="kayu">
             @foreach ($kayuData as $kayu)
             <option value="{{ $kayu->id }}">{{ $kayu->id }} | {{ $kayu->data1 }}</option>

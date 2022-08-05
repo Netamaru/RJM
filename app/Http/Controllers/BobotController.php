@@ -18,7 +18,8 @@ class BobotController extends Controller
     {
         return view('dashboard.bobot', [
             'bobotData' => Bobot::all(),
-            'kriteriaData' => Kriteria::all()
+            'kriteriaData' => Kriteria::all(),
+            'title' => 'Input Bobot'
         ]);
     }
 

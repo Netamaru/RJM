@@ -20,7 +20,8 @@ class KayuController extends Controller
         return view('dashboard.kayu', [
             'bobotData' => Bobot::all(),
             'kayuData' => Kayu::all(),
-            'kriteriaData' => Kriteria::all()
+            'kriteriaData' => Kriteria::all(),
+            'title' => 'Input Kayu'
         ]);
     }
 

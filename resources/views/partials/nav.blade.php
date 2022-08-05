@@ -14,14 +14,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/dashboard/kriteria" style="text-align: center">
-                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                        <i class="bi bi-bar-chart-line-fill"></i>
                         <br>Kriteria
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" style="text-align: center">
-                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                        <i class="bi bi-clipboard2-data-fill"></i>
                         <br>Input Data
                     </a>
                     <ul class="dropdown-menu">
@@ -31,13 +31,13 @@
                 </li>
                 <li class="nav-item"><a href="/dashboard/perhitungan" class="nav-link text-white"
                         style="text-align: center">
-                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                        <i class="bi bi-calculator-fill"></i>
                         <br>Perhitungan
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/dashboard/laporan" style="text-align: center">
-                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                        <i class="bi bi-file-text-fill"></i>
                         <br>Laporan
                     </a>
                 </li>
@@ -48,7 +48,7 @@
                         @csrf
                         <div class="d-flex justify-content-center">
                         <button type="submit" href="/logout" class="nav-link text-white btn border-0">
-                            <i class="bi bi-grid-3x3-gap-fill"></i>
+                            <i class="bi bi-box-arrow-right"></i>
                             <br>logout
                         </button>
                         </div>
