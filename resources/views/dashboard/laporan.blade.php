@@ -1,5 +1,8 @@
 @extends('layouts.main')
 @section('container')
+@php
+    $no = 1;
+@endphp
 <h2 class="text-center">Laporan</h2>
 <div class="position-relative">
 <div class="card mx-auto" style="width: auto; height: auto; max-width: 20rem">
@@ -8,7 +11,7 @@
         <span class="input-group-text" id="basic-addon1">Data Kayu</span>
         <select class="form-select" aria-label="Data Kayu" id="kayu">
             @foreach ($kayuData as $kayu)
-            <option value="{{ $kayu->id }}">{{ $kayu->id }} | {{ $kayu->data1 }}</option>
+            <option value="{{ $kayu->id }}">{{ $no++ }} | {{ $kayu->data1 }}</option>
             @endforeach
         </select>
         </div>
