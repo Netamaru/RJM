@@ -1,6 +1,6 @@
 @extends('layouts.login-layout')
-
 @section('container')
+<img src="/img/logo.png" alt="Rizky Jaya Mandiri" class="mx-auto d-block img-fluid">
     <main class="form-signin w-100 m-auto">
         <form action="/login" method="POST">
             @csrf
@@ -15,11 +15,6 @@
                 <label for="password">Password</label>
             </div>
             <p class="text-danger mt-0 mb-2 text-center">{{ Session::get('loginError') }}</p>
-            {{-- <div class="checkbox mb-3">
-                <label class="text-white">
-                    <input type="checkbox" value="remember-me">Remember me
-                </label>
-            </div> --}}
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>
     </main>
