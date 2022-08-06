@@ -74,7 +74,7 @@
                                                             <input type="text" class="form-control"
                                                                 placeholder="Kriteria" name="kriteria" required
                                                                 pattern="\S(.*\S)?" value="{{ $kriteria->kriteria }}"
-                                                                aria-label="kriteria">
+                                                                aria-label="kriteria" oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
                                                             {{ Request::input('kriteria') }}
                                                         </div>
                                                         <div class="input-group mb-3">
@@ -143,7 +143,7 @@
                     {{ method_field('GET') }}
                     <label for="title" class="mt-3">Nama Kriteria</label>
                     <input type="text" class="form-control" placeholder="Masukkan Nama..." aria-label="kriteria"
-                        id="kriteria" name="kriteria" required pattern="\S(.*\S)?">
+                        id="kriteria" name="kriteria" required pattern="\S(.*\S)?" oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
                     <label for="title" class="mt-3">Tipe</label>
                     <div class="input-group">
                         <select class="form-select" id="tipe" name="tipe">

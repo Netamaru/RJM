@@ -26,19 +26,19 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">{{ $bobotData->where('keterangan', $kayu->data1)->value('kriteria') }}</span>
+                        <span class="input-group-text" id="basic-addon1"><b>{{ $bobotData->where('keterangan', $kayu->data1)->value('kriteria') }}</b></span>
                         <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" disabled value="{{ $kayu->data1 }}">
                       </div>
                       <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">{{ $bobotData->where('keterangan', $kayu->data2)->value('kriteria') }}</span>
+                        <span class="input-group-text" id="basic-addon1"><b>{{ $bobotData->where('keterangan', $kayu->data2)->value('kriteria') }}</b></span>
                         <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" disabled value="{{ $kayu->data2 }}">
                       </div>
                       <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">{{ $bobotData->where('keterangan', $kayu->data3)->value('kriteria') }}</span>
+                        <span class="input-group-text" id="basic-addon1"><b>{{ $bobotData->where('keterangan', $kayu->data3)->value('kriteria') }}</b></span>
                         <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" disabled value="{{ $kayu->data3 }}">
                       </div>
                       <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Jumlah Nilai</span>
+                        <span class="input-group-text" id="basic-addon1"><b>Jumlah Nilai</b></span>
                         <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" disabled value="{{ $kayu->nilai }}">
                       </div>
                 </div>
