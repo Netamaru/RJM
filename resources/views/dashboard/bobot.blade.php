@@ -63,7 +63,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <form method="post" action="{{ route('bobot.edit', $bobot->id) }}">
+                                                <form method="post" action="{{ route('bobot.ubah', $bobot->id) }}">
                                                     @csrf
                                                     {{ method_field('GET') }}
                                                     <div class="modal-body">
@@ -73,7 +73,8 @@
                                                             <input type="text" class="form-control"
                                                                 placeholder="Keterangan" name="keterangan" required
                                                                 pattern="\S(.*\S)?" value="{{ $bobot->keterangan }}"
-                                                                aria-label="kriteria" oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
+                                                                aria-label="kriteria"
+                                                                oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
                                                         </div>
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text" id="basic-addon1">Kriteria</span>
@@ -140,7 +141,8 @@
                     {{ method_field('GET') }}
                     <label for="title" class="mt-3">Keterangan</label>
                     <input type="text" class="form-control" placeholder="Masukkan Keterangan..."
-                        aria-label="keterangan" id="keterangan" name="keterangan" required pattern="\S(.*\S)?" oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
+                        aria-label="keterangan" id="keterangan" name="keterangan" required pattern="\S(.*\S)?"
+                        oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
                     <label for="title" class="mt-3">Kriteria</label>
                     <div class="input-group mb-3">
                         <select class="form-select" id="kriteria" name="kriteria">

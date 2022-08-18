@@ -25,4 +25,14 @@ class DashboardController extends Controller
             'title' => 'Perhitungan'
         ]);
     }
+
+    public function perhitungan_error()
+    {
+        return view('dashboard.perhitungan_error', [
+            'bobotData' => Bobot::all(),
+            'kriteriaData' => Kriteria::all(),
+            'kayuData' => Kayu::all(),
+            'title' => 'Perhitungan'
+        ]);
+    }
 }

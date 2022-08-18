@@ -97,6 +97,7 @@ class KriteriaController extends Controller
 
     public function tambah(StoreKriteriaRequest $request)
     {
+        if (Kriteria::all()->count() >= 3) return back()->with('dataError', 'Kriteria tidak dapat ditambahkan');
         if (Kriteria::where('kriteria', $request['kriteria'])->count() == 1) return back()->with('dataError', 'Kriteria <b>' . $request['kriteria'] . '</b> sudah ada di database');
         Kriteria::Create(['kriteria' => $request['kriteria'], 'bobot' => $request['bobot'], 'tipe' => $request['tipe']]);
         return back()->with('dataAdded', 'Kriteria <b>' . $request['kriteria'] . '</b> berhasil ditambahkan');

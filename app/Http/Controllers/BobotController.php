@@ -64,7 +64,9 @@ class BobotController extends Controller
     public function edit($id, StoreBobotRequest $request)
     {
         $data = Bobot::find($id);
-        if (Bobot::where('keterangan', $request['keterangan'])->where('bobot', $request['bobot'])->where('kriteria', $request['kriteria'])->count() == 1) return back();
+        $bobot = new Bobot;
+        if ($bobot->where('keterangan', $request['keterangan'])->value('id') != $id) return back()->with('dataError', 'Data bobot sudah ada di database');
+        if (Bobot::where('keterangan', $request['keterangan'])->where('bobot', $request['bobot'])->where('kriteria', $request['kriteria'])->count() >= 1) return back();
         $data->update(['keterangan' => $request['keterangan'], 'bobot' => $request['bobot'], 'kriteria' => $request['kriteria']]);
         return back()->with('dataEdited', 'Data berhasil diedit');
     }
@@ -90,8 +92,9 @@ class BobotController extends Controller
 
     public function tambah(StoreBobotRequest $request)
     {
-        if ($request['kriteria'] == null) return back()->with('dataError', 'Kriteria belum ada, silahkan tambah kriteria terlebih dahulu');
         $bobot = new Bobot;
+        if ($request['kriteria'] == null) return back()->with('dataError', 'Kriteria belum ada, silahkan tambah kriteria terlebih dahulu');
+        if ($bobot->where('keterangan', $request['keterangan'])->count() >= 1) return back()->with('dataError', 'Data bobot sudah ada di database');
         $bobot->keterangan = $request['keterangan'];
         $bobot->kriteria = $request['kriteria'];
         $bobot->bobot = $request['bobot'];

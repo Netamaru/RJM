@@ -66,7 +66,7 @@ class KayuController extends Controller
     public function edit($id, StoreKayuRequest $request)
     {
         $data = Kayu::find($id);
-        if (Kayu::where('data1', $request['data1'])->where('data2', $request['data1'])->where('data3', $request['data1'])->count() >= 1) return back();
+        if (Kayu::where('data1', $request['data1'])->where('data2', $request['data2'])->where('data3', $request['data3'])->value('id') != $id) return back()->with('dataError', 'Data yang sama sudah ada di database');;
         $bobot = new Bobot();
         $getBobot1 = $bobot->where('keterangan', $request['data1'])->value('bobot');
         $getBobot2 = $bobot->where('keterangan', $request['data2'])->value('bobot');

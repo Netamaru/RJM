@@ -29,9 +29,9 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Kriteria 1</th>
-                            <th scope="col">Kriteria 2</th>
-                            <th scope="col">Kriteria 3</th>
+                            @foreach ($kriteriaData as $kriteria)
+                                <th scope="col">{{ $kriteria->kriteria }}</th>
+                            @endforeach
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -67,7 +67,7 @@
                                                     $nomorA = 0;
                                                     $nomorB = 0;
                                                 @endphp
-                                                <form method="post" action="{{ route('kayu.edit', $kayu->id) }}">
+                                                <form method="post" action="{{ route('kayu.ubah', $kayu->id) }}">
                                                     @csrf
                                                     {{ method_field('GET') }}
                                                     <div class="modal-body">
@@ -78,7 +78,8 @@
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">Kriteria
                                                                     {{ $nomorA += 1 }}</span>
-                                                                <select class="form-select" aria-label="{{ $_temp }}"
+                                                                <select class="form-select"
+                                                                    aria-label="{{ $_temp }}"
                                                                     name="data{{ $nomorB += 1 }}">
                                                                     @foreach ($bobotData->where('kriteria', $_temp) as $bobot)
                                                                         <option value="{{ $bobot->keterangan }}"

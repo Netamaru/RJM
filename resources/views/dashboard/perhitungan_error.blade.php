@@ -1,91 +1,42 @@
 @extends('layouts.main')
 @section('container')
+    {!! Session::get('dataDeleted')
+        ? '<p class="fs-5 border border-success rounded-1 text-center bg-success bg-opacity-10 w-100 mb-3">' .
+            Session::get('dataDeleted') .
+            '</p>'
+        : '' !!}
+    {!! Session::get('dataEdited')
+        ? '<p class="fs-5 border border-success rounded-1 text-center bg-success bg-opacity-10 w-100 mb-3">' .
+            Session::get('dataEdited') .
+            '</p>'
+        : '' !!}
+    {!! Session::get('dataError')
+        ? '<p class="fs-5 border border-danger rounded-1 text-center bg-danger bg-opacity-10">' .
+            Session::get('dataError') .
+            '</p>'
+        : '' !!}
+    {!! Session::get('dataAdded')
+        ? '<p class="fs-5 border border-success rounded-1 text-center bg-success bg-opacity-10">' .
+            Session::get('dataAdded') .
+            '</p>'
+        : '' !!}
+
     @php
-    try {
-        $nomorA = 0;
-        $nomorB = 0;
-        $nomorC = 0;
-        $nomorD = 0;
-        $nomorE = 0;
-        $nomorF = 1;
+    $nomorA = 0;
+    $nomorB = 0;
+    $nomorC = 0;
+    $nomorD = 0;
+    $nomorE = 0;
+    $nomorF = 1;
 
-        $_bobot = [];
-        $_maxC1 = $kayuData->max('bobot1');
-        $_maxC2 = $kayuData->max('bobot2');
-        $_maxC3 = $kayuData->max('bobot3');
+    $nC1 = [];
+    $nC2 = [];
+    $nC3 = [];
+    $nilai = [];
+    $index = 0;
+    $index2 = 0;
+    $ranking = [];
 
-        $_minC1 = $kayuData->min('bobot1');
-        $_minC2 = $kayuData->min('bobot2');
-        $_minC3 = $kayuData->min('bobot3');
-
-        //normalisasi
-        $nC1 = [];
-        $nC2 = [];
-        $nC3 = [];
-
-        //perhitungan normalisasi
-        foreach ($kayuData as $kayu) {
-            if ($kriteriaData->where('kriteria', $bobotData->where('keterangan', $kayu->data1)->value('kriteria'))->value('tipe') == 'cost') {
-                $_temp = $_minC1 / $kayu->bobot1;
-                array_push($nC1, round($_temp, 3));
-            }
-            if ($kriteriaData->where('kriteria', $bobotData->where('keterangan', $kayu->data1)->value('kriteria'))->value('tipe') == 'benefit') {
-                $_temp = $kayu->bobot1 / $_maxC1;
-                array_push($nC1, round($_temp, 3));
-            }
-
-            if ($kriteriaData->where('kriteria', $bobotData->where('keterangan', $kayu->data2)->value('kriteria'))->value('tipe') == 'cost') {
-                $_temp = $_minC2 / $kayu->bobot2;
-                array_push($nC2, round($_temp, 3));
-            }
-            if ($kriteriaData->where('kriteria', $bobotData->where('keterangan', $kayu->data2)->value('kriteria'))->value('tipe') == 'benefit') {
-                $_temp = $kayu->bobot2 / $_maxC2;
-                array_push($nC2, round($_temp, 3));
-            }
-
-            if ($kriteriaData->where('kriteria', $bobotData->where('keterangan', $kayu->data3)->value('kriteria'))->value('tipe') == 'cost') {
-                $_temp = $_minC3 / $kayu->bobot3;
-                array_push($nC3, round($_temp, 3));
-            }
-            if ($kriteriaData->where('kriteria', $bobotData->where('keterangan', $kayu->data3)->value('kriteria'))->value('tipe') == 'benefit') {
-                $_temp = $kayu->bobot3 / $_maxC3;
-                array_push($nC3, round($_temp, 3));
-            }
-        }
-
-        foreach ($kriteriaData as $kriteria) {
-            array_push($_bobot, $kriteria->bobot);
-        }
-
-        //perhitungan nilai
-        $nilai = [];
-        $index = 0;
-        $index2 = 0;
-        $ranking = [];
-        foreach ($kayuData as $kayu) {
-            $_temp = $nC1[$index] * $_bobot[0] + $nC2[$index] * $_bobot[1] + $nC3[$index] * $_bobot[2];
-            array_push($nilai, round($_temp, 2));
-            $index++;
-        }
-
-        $ordered_values = $nilai;
-        rsort($ordered_values);
-        foreach ($nilai as $key => $value) {
-            foreach ($ordered_values as $ordered_key => $ordered_value) {
-                if ($value === $ordered_value) {
-                    $key = $ordered_key;
-                    break;
-                }
-            }
-            array_push($ranking, (int) $key + 1);
-        }
-
-        foreach ($kayuData as $kayu) {
-            $kayu->update(['nilai' => $nilai[$index2++]]);
-        }
-    } catch (Throwable $e) {
-        return @dd('Data Kriteria belum lengkap atau data kayu dan data bobot tidak sesuai, silahkan mengkoreksi data tersebut');
-    }
     @endphp
 
     <h2 class="text-center">Perhitungan</h2>

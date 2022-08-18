@@ -64,7 +64,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <form method="post" action="{{ route('kriteria.edit', $kriteria->id) }}">
+                                                <form method="post" action="{{ route('kriteria.ubah', $kriteria->id) }}">
                                                     @csrf
                                                     {{ method_field('GET') }}
                                                     <div class="modal-body">
@@ -74,7 +74,8 @@
                                                             <input type="text" class="form-control"
                                                                 placeholder="Kriteria" name="kriteria" required
                                                                 pattern="\S(.*\S)?" value="{{ $kriteria->kriteria }}"
-                                                                aria-label="kriteria" oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
+                                                                aria-label="kriteria"
+                                                                oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
                                                             {{ Request::input('kriteria') }}
                                                         </div>
                                                         <div class="input-group mb-3">
@@ -143,7 +144,8 @@
                     {{ method_field('GET') }}
                     <label for="title" class="mt-3">Nama Kriteria</label>
                     <input type="text" class="form-control" placeholder="Masukkan Nama..." aria-label="kriteria"
-                        id="kriteria" name="kriteria" required pattern="\S(.*\S)?" oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
+                        id="kriteria" name="kriteria" required pattern="\S(.*\S)?"
+                        oninvalid="this.setCustomValidity('Format karakter tidak benar.')">
                     <label for="title" class="mt-3">Tipe</label>
                     <div class="input-group">
                         <select class="form-select" id="tipe" name="tipe">
@@ -166,7 +168,7 @@
                         <label class="form-check-label" for="inlineRadio3">3</label>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3 mb-3 w-100"
-                        {{ $kriteria->count() == 3 ? 'disabled' : '' }}>Simpan</button>
+                        {{ $kriteria->count() >= 3 ? 'disabled' : '' }}>Simpan</button>
                 </form>
             </div>
         </div>
