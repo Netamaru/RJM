@@ -66,7 +66,7 @@ class KriteriaController extends Controller
     public function edit($id, StoreKriteriaRequest $request)
     {
         $data = Kriteria::find($id);
-        if (Kriteria::where('kriteria', $request['kriteria'])->where('bobot', $request['bobot'])->where('tipe', $request['tipe'])->count() == 1) return back();
+        if (Kriteria::where('kriteria', $request['kriteria'])->where('bobot', $request['bobot'])->where('tipe', $request['tipe'])->count() == 1 && Kriteria::where('kriteria', $request['kriteria'])->where('bobot', $request['bobot'])->where('tipe', $request['tipe'])->value('id') != $id) return back()->with('dataError', 'Kriteria yang sama sudah ada di database');
         $data->update(['kriteria' => $request['kriteria'], 'bobot' => $request['bobot'], 'tipe' => $request['tipe']]);
         return back()->with('dataEdited', 'Kriteria berhasil diedit');
     }
