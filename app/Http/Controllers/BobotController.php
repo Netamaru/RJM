@@ -65,7 +65,10 @@ class BobotController extends Controller
     {
         $data = Bobot::find($id);
         $bobot = new Bobot;
+        if (Bobot::where('keterangan', $request['keterangan'])->count() >= 1 && Bobot::where('keterangan', $request['keterangan'])->value('id') != $id) return back()->with('dataError', 'Data bobot sudah ada di database');
+
         if (Bobot::where('keterangan', $request['keterangan'])->where('bobot', $request['bobot'])->where('kriteria', $request['kriteria'])->count() >= 1 && Bobot::where('keterangan', $request['keterangan'])->where('bobot', $request['bobot'])->where('kriteria', $request['kriteria'])->value('id') != $id) return back()->with('dataError', 'Data bobot sudah ada di database');
+
         $data->update(['keterangan' => $request['keterangan'], 'bobot' => $request['bobot'], 'kriteria' => $request['kriteria']]);
         return back()->with('dataEdited', 'Data berhasil diedit');
     }
